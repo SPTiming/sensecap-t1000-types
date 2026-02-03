@@ -1,0 +1,43 @@
+name: CI - Build Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Generate TypeScript types
+        run: npm run gen:types
+      
+      - name: Build package
+        run: npm run build
+      
+      - name: Verify build artifacts
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "Error: dist folder not created"
+            exit 1
+          fi
+          if [ ! -f "dist/index.d.ts" ]; then
+            echo "Error: index.d.ts not generated"
+            exit 1
+          fi
+          echo "Build verification successful!"
