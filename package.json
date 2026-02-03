@@ -1,0 +1,39 @@
+{
+  "name": "@sptiming/sensecap-t1000-types",
+  "version": "1.0.0",
+  "description": "TypeScript types for SenseCAP T1000 LoRa Tracker decoded payloads",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src/specs/decoded-payload.schema.json"
+  ],
+  "scripts": {
+    "gen:types": "json2ts -i src/specs/decoded-payload.schema.json -o src/types/index.ts",
+    "build": "tsc",
+    "prepublishOnly": "npm run gen:types && npm run build",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "sensecap",
+    "t1000",
+    "lora",
+    "lorawan",
+    "tracker",
+    "typescript",
+    "types"
+  ],
+  "author": "SPTiming",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sptiming/sensecap-t1000-formatter.git"
+  },
+  "devDependencies": {
+    "json-schema-to-typescript": "^13.1.1",
+    "typescript": "^5.3.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

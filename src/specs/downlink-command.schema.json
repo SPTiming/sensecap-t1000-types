@@ -1,0 +1,180 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://sptiming.com/schemas/sensecap-t1000-downlink-command.json",
+  "title": "SenseCAP T1000 Downlink Command",
+  "description": "Simple flat structure for downlink commands to SenseCAP T1000 tracker",
+  "type": "object",
+  "required": ["commandType", "fPort"],
+  "properties": {
+    "commandType": {
+      "type": "string",
+      "enum": ["0x80", "0x81", "0x82", "0x83", "0x84", "0x85", "0x86", "0x87", "0x88", "0x89", "0x8C", "0x8D"],
+      "description": "Command type ID"
+    },
+    "fPort": {
+      "type": "integer",
+      "const": 5,
+      "description": "LoRaWAN FPort (always 5 for downlink)"
+    },
+    "sosMode": {
+      "type": "integer",
+      "enum": [0, 1],
+      "description": "SOS mode: 0=single, 1=continuous (0x80)"
+    },
+    "intervals": {
+      "type": "object",
+      "properties": {
+        "heartbeat": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Heartbeat interval in minutes (0=keep current)"
+        },
+        "periodic": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Periodic mode interval in minutes (0=keep current)"
+        },
+        "event": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Event mode interval in minutes (0=keep current)"
+        }
+      },
+      "description": "Uplink intervals (0x81)"
+    },
+    "buzzer": {
+      "type": "integer",
+      "enum": [0, 1],
+      "description": "Buzzer control: 0=close, 1=open (0x82)"
+    },
+    "workMode": {
+      "type": "integer",
+      "enum": [0, 1, 2],
+      "description": "Work mode: 0=Standby, 1=Periodic, 2=Event (0x83)"
+    },
+    "positioningStrategy": {
+      "type": "integer",
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7],
+      "description": "Positioning strategy (0x86): 0=GNSS, 1=WiFi, 2=WiFi+GNSS, 3=GNSS+WiFi, 4=BLE, 5=BLE+WiFi, 6=BLE+GNSS, 7=BLE+WiFi+GNSS"
+    },
+    "sensorEnable": {
+      "type": "integer",
+      "enum": [0, 1],
+      "description": "Temperature and light sensor: 0=close, 1=open (0x8C)"
+    },
+    "sosAlarm": {
+      "type": "integer",
+      "enum": [0, 1],
+      "description": "SOS alarm: 0=close, 1=open (0x8D)"
+    },
+    "eventConfig": {
+      "type": "object",
+      "properties": {
+        "motion": {
+          "type": "object",
+          "properties": {
+            "enable": {
+              "type": "integer",
+              "enum": [0, 1]
+            },
+            "threshold": {
+              "type": "number",
+              "description": "3-axis motion threshold in mg"
+            },
+            "startInterval": {
+              "type": "integer",
+              "description": "Motion start interval in minutes"
+            }
+          }
+        },
+        "static": {
+          "type": "object",
+          "properties": {
+            "enable": {
+              "type": "integer",
+              "enum": [0, 1]
+            },
+            "timeout": {
+              "type": "integer",
+              "description": "Motionless timeout in minutes"
+            }
+          }
+        },
+        "shock": {
+          "type": "object",
+          "properties": {
+            "enable": {
+              "type": "integer",
+              "enum": [0, 1]
+            },
+            "threshold": {
+              "type": "number",
+              "description": "3-axis shock threshold in mg"
+            }
+          }
+        },
+        "temperature": {
+          "type": "object",
+          "properties": {
+            "enable": {
+              "type": "integer",
+              "enum": [0, 1]
+            },
+            "eventInterval": {
+              "type": "integer",
+              "description": "Temperature event uplink interval in minutes"
+            },
+            "sampleInterval": {
+              "type": "integer",
+              "description": "Temperature sample interval in seconds"
+            },
+            "thresholdMax": {
+              "type": "number",
+              "description": "Maximum temperature threshold in Celsius"
+            },
+            "thresholdMin": {
+              "type": "number",
+              "description": "Minimum temperature threshold in Celsius"
+            },
+            "warningType": {
+              "type": "integer",
+              "enum": [0, 1, 2, 3],
+              "description": "0=temp≤min, 1=temp≥max, 2=temp≤min OR temp≥max, 3=min≤temp≤max"
+            }
+          }
+        },
+        "light": {
+          "type": "object",
+          "properties": {
+            "enable": {
+              "type": "integer",
+              "enum": [0, 1]
+            },
+            "eventInterval": {
+              "type": "integer",
+              "description": "Light event uplink interval in minutes"
+            },
+            "sampleInterval": {
+              "type": "integer",
+              "description": "Light sample interval in seconds"
+            },
+            "thresholdMax": {
+              "type": "number",
+              "description": "Maximum light threshold percentage"
+            },
+            "thresholdMin": {
+              "type": "number",
+              "description": "Minimum light threshold percentage"
+            },
+            "warningType": {
+              "type": "integer",
+              "enum": [0, 1, 2, 3],
+              "description": "0=light≤min, 1=light≥max, 2=light≤min OR light≥max, 3=min≤light≤max"
+            }
+          }
+        }
+      },
+      "description": "Event configuration (0x84)"
+    }
+  }
+}

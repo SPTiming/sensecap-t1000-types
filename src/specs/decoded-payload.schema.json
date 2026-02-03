@@ -1,0 +1,228 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://sptiming.com/schemas/sensecap-t1000-decoded-payload.json",
+  "title": "SenseCAP T1000 Decoded Payload",
+  "description": "Simple flat structure for decoded SenseCAP T1000 tracker payload",
+  "type": "object",
+  "required": ["valid", "err", "payload", "frameType"],
+  "properties": {
+    "valid": {
+      "type": "boolean",
+      "description": "Whether the payload was successfully decoded"
+    },
+    "err": {
+      "type": "integer",
+      "description": "Error code (0 = no error)"
+    },
+    "payload": {
+      "type": "string",
+      "description": "Hex string of original payload"
+    },
+    "frameType": {
+      "type": "string",
+      "enum": ["0x01", "0x02", "0x05", "0x06", "0x07", "0x08", "0x09", "0x0A", "0x0B", "0x0D", "0x11"],
+      "description": "Frame type ID"
+    },
+    "errMessage": {
+      "type": "string",
+      "description": "Error message (only when err > 0)"
+    },
+    "timestamp": {
+      "type": "integer",
+      "description": "UTC timestamp in milliseconds"
+    },
+    "motionId": {
+      "type": "integer",
+      "description": "Motion segment number"
+    },
+    "battery": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Battery percentage"
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "longitude": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        }
+      }
+    },
+    "temperature": {
+      "type": "number",
+      "description": "Temperature in Celsius"
+    },
+    "light": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Light level percentage"
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "wifiScan": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "mac": {
+            "type": "string",
+            "pattern": "^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$"
+          },
+          "rssi": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "bleScan": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "mac": {
+            "type": "string",
+            "pattern": "^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$"
+          },
+          "rssi": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "positioningStatus": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 14
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "firmwareVersion": {
+      "type": "string"
+    },
+    "hardwareVersion": {
+      "type": "string"
+    },
+    "workMode": {
+      "type": "integer",
+      "enum": [0, 1, 2],
+      "description": "0=Standby, 1=Periodic, 2=Event"
+    },
+    "positioningStrategy": {
+      "type": "integer",
+      "enum": [0, 1, 2, 3, 4, 5, 6, 7],
+      "description": "Positioning method"
+    },
+    "sosMode": {
+      "type": "integer",
+      "enum": [0, 1],
+      "description": "0=single, 1=continuous"
+    },
+    "heartbeatInterval": {
+      "type": "integer",
+      "description": "Minutes"
+    },
+    "periodicInterval": {
+      "type": "integer",
+      "description": "Minutes"
+    },
+    "eventInterval": {
+      "type": "integer",
+      "description": "Minutes"
+    },
+    "sensorEnable": {
+      "type": "integer",
+      "enum": [0, 1]
+    },
+    "config": {
+      "type": "object",
+      "properties": {
+        "motion": {
+          "type": "object",
+          "properties": {
+            "enable": { "type": "integer" },
+            "threshold": { "type": "number" },
+            "startInterval": { "type": "integer" }
+          }
+        },
+        "static": {
+          "type": "object",
+          "properties": {
+            "enable": { "type": "integer" },
+            "timeout": { "type": "integer" }
+          }
+        },
+        "shock": {
+          "type": "object",
+          "properties": {
+            "enable": { "type": "integer" },
+            "threshold": { "type": "number" }
+          }
+        },
+        "temperature": {
+          "type": "object",
+          "properties": {
+            "enable": { "type": "integer" },
+            "eventInterval": { "type": "integer" },
+            "sampleInterval": { "type": "integer" },
+            "thresholdMax": { "type": "number" },
+            "thresholdMin": { "type": "number" },
+            "warningType": { "type": "integer" }
+          }
+        },
+        "light": {
+          "type": "object",
+          "properties": {
+            "enable": { "type": "integer" },
+            "eventInterval": { "type": "integer" },
+            "sampleInterval": { "type": "integer" },
+            "thresholdMax": { "type": "number" },
+            "thresholdMin": { "type": "number" },
+            "warningType": { "type": "integer" }
+          }
+        }
+      }
+    },
+    "error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

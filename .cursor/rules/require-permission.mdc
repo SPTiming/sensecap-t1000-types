@@ -1,0 +1,45 @@
+---
+description: Require explicit user permission before writing any files
+alwaysApply: true
+---
+
+# Require Permission Before Writing Files
+
+**CRITICAL RULE**: You MUST NOT write, modify, or delete ANY files without explicit user permission.
+
+## Workflow
+
+1. **Discuss and Plan**: Talk through the solution with the user first
+2. **Propose Changes**: Clearly describe what files you want to create/modify
+3. **Wait for Permission**: Ask explicitly: "Can I create/modify these files?"
+4. **Execute Only After Approval**: Only write files after user says "yes" or "approve"
+
+## Examples
+
+### ❌ BAD - Writing without permission
+```
+User: "We need a config file"
+AI: *immediately creates config.json*
+```
+
+### ✅ GOOD - Ask first
+```
+User: "We need a config file"
+AI: "I can create a config.json with the following structure: {...}
+     Should I create this file?"
+User: "yes"
+AI: *now creates the file*
+```
+
+## Exceptions
+
+The ONLY time you can write without asking is when:
+- User explicitly says "create X file" or "write to X"
+- User says "go ahead", "approved", "yes do it"
+- User gives explicit permission in their message
+
+## When in Doubt
+
+If you're unsure whether you have permission → **ASK**
+
+Never assume permission. Better to ask twice than write unwanted code.

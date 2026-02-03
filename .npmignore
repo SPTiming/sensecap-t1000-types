@@ -1,0 +1,9 @@
+src/custom/
+src/original/
+samples/
+doc/
+.cursor/
+*.md
+!README.md
+tsconfig.json
+.gitignore

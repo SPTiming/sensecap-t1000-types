@@ -1,0 +1,156 @@
+{
+    "name": "as.up.data.forward",
+    "time": "2026-02-03T19:53:54.579010987Z",
+    "identifiers": [
+      {
+        "device_ids": {
+          "device_id": "trackmium-tr-1203",
+          "application_ids": {
+            "application_id": "trackmium"
+          },
+          "dev_eui": "2CF7F1C05410057A",
+          "join_eui": "AC1F09FFFE003541",
+          "dev_addr": "27FD9693"
+        }
+      }
+    ],
+    "data": {
+      "@type": "type.googleapis.com/ttn.lorawan.v3.ApplicationUp",
+      "end_device_ids": {
+        "device_id": "trackmium-tr-1203",
+        "application_ids": {
+          "application_id": "trackmium"
+        },
+        "dev_eui": "2CF7F1C05410057A",
+        "join_eui": "AC1F09FFFE003541",
+        "dev_addr": "27FD9693"
+      },
+      "correlation_ids": [
+        "pba:uplink:01KGJH34DM6EMSJ6QB9AHDYBEQ"
+      ],
+      "received_at": "2026-02-03T19:53:54.567983048Z",
+      "uplink_message": {
+        "session_key_id": "AZwa/e7UYlNo7M00Z4gL9w==",
+        "f_port": 5,
+        "f_cnt": 1390,
+        "frm_payload": "CQAAAABpglJCAHCTnwLBY7hG",
+        "decoded_payload": {
+          "err": 0,
+          "latitude": 46.228408,
+          "longitude": 7.377823,
+          "messages": [
+            [
+              {
+                "measurementId": "4200",
+                "measurementValue": [],
+                "motionId": 0,
+                "timestamp": 1770148418000,
+                "type": "Event Status"
+              },
+              {
+                "measurementId": "4197",
+                "measurementValue": 7.377823,
+                "motionId": 0,
+                "timestamp": 1770148418000,
+                "type": "Longitude"
+              },
+              {
+                "measurementId": "4198",
+                "measurementValue": 46.228408,
+                "motionId": 0,
+                "timestamp": 1770148418000,
+                "type": "Latitude"
+              },
+              {
+                "measurementId": "3000",
+                "measurementValue": 70,
+                "motionId": 0,
+                "timestamp": 1770148418000,
+                "type": "Battery"
+              }
+            ]
+          ],
+          "payload": "0900000000698252420070939f02c163b846",
+          "valid": true
+        },
+        "rx_metadata": [
+          {
+            "gateway_ids": {
+              "gateway_id": "packetbroker"
+            },
+            "packet_broker": {
+              "message_id": "01KGJH34DM6EMSJ6QB9AHDYBEQ",
+              "forwarder_net_id": "000013",
+              "forwarder_tenant_id": "ttn",
+              "forwarder_cluster_id": "eu1.cloud.thethings.network",
+              "forwarder_gateway_eui": "3133303737002E01",
+              "forwarder_gateway_id": "hb9y-ayen-bli",
+              "home_network_net_id": "000013",
+              "home_network_tenant_id": "trackmium-lora",
+              "home_network_cluster_id": "eu1.cloud.thethings.industries"
+            },
+            "time": "2026-02-03T19:53:54.296305Z",
+            "rssi": -115,
+            "channel_rssi": -115,
+            "snr": -10.75,
+            "uplink_token": "Cm8KX8uitQrpaySxbcc59IYG54YPFtSJZFek6jMOXXkCVRl6Z7w+XZxa5kvXzpctf7VZnmuktUNUivltSPflADqgT37AZME3ZAP8i7Ku1yiWSOvACudH5j/f0snbMCXnpUumEgx8ip5MbunmKCKpgTMaJwoDAAATEgN0dG4aG2V1MS5jbG91ZC50aGV0aGluZ3MubmV0d29yaw==",
+            "received_at": "2026-02-03T19:53:54.350925997Z"
+          }
+        ],
+        "settings": {
+          "data_rate": {
+            "lora": {
+              "bandwidth": 125000,
+              "spreading_factor": 11,
+              "coding_rate": "4/5"
+            }
+          },
+          "frequency": "867900000"
+        },
+        "received_at": "2026-02-03T19:53:54.358674601Z",
+        "confirmed": true,
+        "consumed_airtime": "0.905216s",
+        "packet_error_rate": 0.06666667,
+        "locations": {
+          "frm-payload": {
+            "latitude": 46.228408,
+            "longitude": 7.377823,
+            "source": "SOURCE_GPS"
+          }
+        },
+        "version_ids": {
+          "brand_id": "sensecap",
+          "model_id": "sensecapt1000-tracker-ab",
+          "hardware_version": "1.0",
+          "firmware_version": "1.0",
+          "band_id": "EU_863_870"
+        },
+        "network_ids": {
+          "net_id": "000013",
+          "ns_id": "EC656E0000103155",
+          "tenant_id": "trackmium-lora",
+          "cluster_id": "eu1",
+          "cluster_address": "eu1.cloud.thethings.industries",
+          "tenant_address": "trackmium-lora.eu1.cloud.thethings.industries"
+        },
+        "last_battery_percentage": {
+          "f_cnt": 1209,
+          "value": 100,
+          "received_at": "2026-02-03T15:48:53.880086462Z"
+        }
+      }
+    },
+    "correlation_ids": [
+      "pba:uplink:01KGJH34DM6EMSJ6QB9AHDYBEQ"
+    ],
+    "origin": "ip-10-23-14-191.eu-west-1.compute.internal",
+    "context": {
+      "tenant-id": "Cg50cmFja21pdW0tbG9yYQ=="
+    },
+    "visibility": {
+      "rights": [
+        "RIGHT_APPLICATION_TRAFFIC_READ"
+      ]
+    },
+    "unique_id": "01KGJH34MK048XT28A3F2FY9A1"
+  }

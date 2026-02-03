@@ -1,0 +1,228 @@
+openapi: 3.0.3
+info:
+  title: SenseCAP T1000 SPTiming Decoder
+  version: 1.0.0
+  description: Simple flat structure for decoded SenseCAP T1000 tracker payload
+
+components:
+  schemas:
+    DecodedPayload:
+      type: object
+      required:
+        - valid
+        - err
+        - payload
+        - frameType
+      properties:
+        valid:
+          type: boolean
+          description: Whether the payload was successfully decoded
+          example: true
+        err:
+          type: integer
+          description: Error code (0 = no error)
+          example: 0
+        payload:
+          type: string
+          description: Hex string of original payload
+          example: "0900000000698252420070939f02c163b846"
+        frameType:
+          type: string
+          enum: ["0x01", "0x02", "0x05", "0x06", "0x07", "0x08", "0x09", "0x0A", "0x0B", "0x0D", "0x11"]
+          description: Frame type ID
+          example: "0x09"
+        errMessage:
+          type: string
+          description: Error message (only when err > 0)
+        timestamp:
+          type: integer
+          format: int64
+          description: UTC timestamp in milliseconds
+          example: 1770148418000
+        motionId:
+          type: integer
+          description: Motion segment number
+          example: 0
+        battery:
+          type: number
+          minimum: 0
+          maximum: 100
+          description: Battery percentage
+          example: 70
+        location:
+          type: object
+          properties:
+            latitude:
+              type: number
+              minimum: -90
+              maximum: 90
+              example: 46.228408
+            longitude:
+              type: number
+              minimum: -180
+              maximum: 180
+              example: 7.377823
+        temperature:
+          type: number
+          description: Temperature in Celsius
+          example: 25.4
+        light:
+          type: number
+          minimum: 0
+          maximum: 100
+          description: Light level percentage
+          example: 0
+        events:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                minimum: 1
+                maximum: 8
+              name:
+                type: string
+          example:
+            - id: 4
+              name: "Shock event"
+        wifiScan:
+          type: array
+          items:
+            type: object
+            properties:
+              mac:
+                type: string
+                pattern: '^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$'
+              rssi:
+                type: integer
+          example:
+            - mac: "48:73:97:16:22:34"
+              rssi: -69
+        bleScan:
+          type: array
+          items:
+            type: object
+            properties:
+              mac:
+                type: string
+                pattern: '^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$'
+              rssi:
+                type: integer
+          example:
+            - mac: "51:62:D2:C1:B9:D3"
+              rssi: -64
+        positioningStatus:
+          type: object
+          properties:
+            id:
+              type: integer
+              minimum: 0
+              maximum: 14
+            message:
+              type: string
+          example:
+            id: 0
+            message: "locate successful"
+        firmwareVersion:
+          type: string
+          example: "1.5"
+        hardwareVersion:
+          type: string
+          example: "1.0"
+        workMode:
+          type: integer
+          enum: [0, 1, 2]
+          description: "0=Standby, 1=Periodic, 2=Event"
+          example: 2
+        positioningStrategy:
+          type: integer
+          enum: [0, 1, 2, 3, 4, 5, 6, 7]
+          description: Positioning method
+          example: 7
+        sosMode:
+          type: integer
+          enum: [0, 1]
+          description: "0=single, 1=continuous"
+          example: 0
+        heartbeatInterval:
+          type: integer
+          description: Minutes
+          example: 30
+        periodicInterval:
+          type: integer
+          description: Minutes
+          example: 60
+        eventInterval:
+          type: integer
+          description: Minutes
+          example: 5
+        sensorEnable:
+          type: integer
+          enum: [0, 1]
+          example: 1
+        config:
+          type: object
+          properties:
+            motion:
+              type: object
+              properties:
+                enable:
+                  type: integer
+                threshold:
+                  type: number
+                startInterval:
+                  type: integer
+            static:
+              type: object
+              properties:
+                enable:
+                  type: integer
+                timeout:
+                  type: integer
+            shock:
+              type: object
+              properties:
+                enable:
+                  type: integer
+                threshold:
+                  type: number
+            temperature:
+              type: object
+              properties:
+                enable:
+                  type: integer
+                eventInterval:
+                  type: integer
+                sampleInterval:
+                  type: integer
+                thresholdMax:
+                  type: number
+                thresholdMin:
+                  type: number
+                warningType:
+                  type: integer
+            light:
+              type: object
+              properties:
+                enable:
+                  type: integer
+                eventInterval:
+                  type: integer
+                sampleInterval:
+                  type: integer
+                thresholdMax:
+                  type: number
+                thresholdMin:
+                  type: number
+                warningType:
+                  type: integer
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              minimum: 1
+              maximum: 3
+            message:
+              type: string
